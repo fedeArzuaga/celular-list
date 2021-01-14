@@ -1,0 +1,20 @@
+@import 'utilities/variables';
+@import 'utilities/mixins';
+
+html {
+    font-size: 14px;
+    line-height: 1.4;
+    color: $global-color;
+    @include media-small-and-bigger {
+        font-size: 18px;
+    }
+}
+
+body {
+    background: $global-light-color;
+    font-family: $global-font;
+}
+
+.theme-panel {
+    padding: 2.5rem 0;
+}

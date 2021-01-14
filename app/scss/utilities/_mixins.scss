@@ -1,0 +1,25 @@
+
+// Media querys
+@mixin media-small-and-bigger {
+    @media screen and (min-width: 576px){
+        @content;
+    }
+}
+
+@mixin media-medium-and-bigger {
+    @media screen and (min-width: 768px){
+        @content;
+    }
+}
+
+@mixin media-large-and-bigger {
+    @media screen and (min-width: 992px){
+        @content;
+    }
+}
+
+@mixin media-extra-large-and-bigger {
+    @media screen and (min-width: 1200px){
+        @content;
+    }
+}
