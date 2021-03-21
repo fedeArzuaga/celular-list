@@ -1,0 +1,16 @@
+// Display grid on Bootstrap
+.d-grid-temp-cols-1 {
+    grid-template-columns: repeat(1, 1fr);
+}
+
+.d-grid-temp-cols-md-2 {
+    @include media-medium-and-bigger {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.d-grid-temp-cols-md-3 {
+    @include media-medium-and-bigger {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}

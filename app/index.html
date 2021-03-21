@@ -4,42 +4,134 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registros de celulares</title>
-    <link rel="stylesheet" href="css/bootstrap-grid.min.css" />
     <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/bootstrap-grid.min.css" />
+    <link rel="stylesheet" href="css/bootstrap-icons.css" />
     <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
-    <div class="theme-panel">
+    <div id="toggle-section" class="theme-navegation-menu">
+        <a class="btn btn-primary btn-lg tm-active" href="#">
+            Revisitas <i class="bi bi-forward-fill"></i>
+        </a>
+        <a class="btn btn-primary btn-lg" href="#">
+            Celulares <i class="bi bi-forward-fill"></i>
+        </a>
+    </div>
+
+    <div id="numbers-panel" class="theme-panel">
         <div class="container-xl">
-            <h1>Registro de números telefónicos</h1>
-            <p>Administre la lista de números telefónicos dada por el superintendente de grupo a cargo.</p>
-            <div class="row mt-5">
+            
+            <div class="d-flex flex-column flex-lg-row justify-content-md-between">
+                <div>
+                    <h1>Registro de números telefónicos</h1>
+                    <p>Administre la lista de números telefónicos dada por el superintendente de grupo a cargo.</p>
+                </div>
+    
+                <ul class="theme-reference-list">
+                    <li>
+                        <i class="bi bi-arrow-repeat"></i> <span>Restablecer número</span>
+                    </li>
+                    <li>
+                        <i class="bi bi-person-plus-fill"></i> <span>Nueva revisita</span>
+                    </li>
+                    <li>
+                        <i class="bi bi-telephone-x-fill"></i> <span>Número ocupado</span>
+                    </li>
+                    <li>
+                        <i class="bi bi-x"></i> <span>Eliminar número</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="row mt-5 theme-container-form">
 
                 <!-- Form -->
-               <div class="col-12 col-md-3">
+                <div class="col-12 col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <p>Utiliza este formulario para realizar un listado de números, en base a dos números: inicio y final (Estos inclusive).</p>
+                            <form id="form">
+                                <div class="mb-3">
+                                    <label for="from_number" class="form-label">Desde</label>
+                                    <input type="number" class="form-control" id="from_number" name="from_number">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="to_number" class="form-label">Hasta</label>
+                                    <input type="number" class="form-control" id="to_number" name="to_number">
+                                </div>
+                                <div class="d-grid gap-3">
+                                    <input id="send-button" type="submit" class="btn btn-success" value="Listar números" />
+                                    <button id="drop-button" class="btn btn-danger d-none">Eliminar lista</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    
 
-               </div>
+                </div>
 
                <!-- Numbers will be listed here -->
-               <div class="col-12 col-md-9">
-                   <div class="row">
-                        <div class="col-12 col-md-6 col-lg-4">
-                            092345332
-                        </div>
-                        <div class="col-12 col-md-6 col-lg-4">
-                            092345332
-                        </div>
-                        <div class="col-12 col-md-6 col-lg-4">
-                            092345332
-                        </div>
-                   </div>
-               </div>
+                <div class="col-12 col-md-8 mt-5 mt-md-0">
+                    <div id="numbers-list" class="d-grid d-grid-temp-cols-1 d-grid-temp-cols-md-2 gap-2"></div>
+                </div>
+                
             </div>
         </div>
     </div>
 
-    
+    <div class="modal fade" id="newRevisitModal">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h3>Nueva revisita</h3>
+                    <p>Registre la nueva revisita completando los campos indicados aquí debajo.</p>
+                    <form id="newRevisit">
+                        <div class="mb-3">
+                            <label for="revisitName" required class="form-label">Nombre *</label>
+                            <input placeholder="Ej: José Pérez" type="text" class="form-control" id="revisitName" name="revisitName">
+                        </div>
+                        <div class="mb-3">
+                            <label for="talkAbout" required class="form-label">Tema de conversación *</label>
+                            <input placeholder="Ej: Esperanza de la resurrección" type="text" class="form-control" id="talkAbout" name="talkAbout">
+                        </div>
+                        <div class="mb-3">
+                            <label for="questionToAnswer" class="form-label">Pregunta pendiente</label>
+                            <input placeholder="Ej: ¿Quiénes van a resucitar?" type="text" class="form-control" id="questionToAnswer" name="questionToAnswer">
+                        </div>
+                        <div class="mb-3">
+                            <label for="otherData" class="form-label">Otros datos</label>
+                            <textarea placeholder="Ej: No cree en Dios, perdió un ser querido, etc" type="text" class="form-control" id="otherData" name="otherData"></textarea>
+                        </div>
+                        <div class="d-grid gap-3 mb-3">
+                            <input type="submit" class="btn btn-success" value="Registrar revisita" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="revisit-panel" class="theme-panel hidden">
+        <div class="container-xl">
+            <div>
+                <h1>Registro de revisitas</h1>
+                <p>Administre sus revisitas en el siguiente panel, o bien borre todos los registros para empezar desde cero.<br><b>Si borra los registros, estos no podrán recuperarse, así que asegúrese de anotarlos en un lugar seguro.</b></p>
+
+                <!-- Numbers will be listed here -->
+                <div class="col-12 mt-5 mt-md-0">
+                    <div id="revisit-list" class="d-grid d-grid-temp-cols-1 d-grid-temp-cols-sm-2 d-grid-temp-cols-md-3 d-grid-temp-cols-lg-4 gap-2">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="module" src="js/app.js"></script>
 
 </body>

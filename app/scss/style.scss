@@ -1,5 +1,6 @@
 @import 'utilities/variables';
 @import 'utilities/mixins';
+@import 'utilities/complement';
 
 html {
     font-size: 14px;
@@ -17,4 +18,153 @@ body {
 
 .theme-panel {
     padding: 2.5rem 0;
+}
+
+.hidden {
+    display: none;
+}
+
+.theme-navegation-menu {
+    text-align: right;
+    position: fixed;
+    z-index: 100;
+    bottom: 20px;
+    right: 20px;
+    
+    & > a { 
+        display: flex;
+        align-items: center;
+
+        & > i{
+            margin-left: 5px;
+        }
+
+        &:not(.tm-active) {
+            display: none;
+        }
+
+    }
+
+}
+
+
+
+// Reference list 
+.theme-reference-list {
+    list-style: none;
+    padding-left: 0;
+    font-size: .8rem;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    background: rgb(248, 246, 246);
+
+    & > li {
+
+        span {
+            margin-left: 5px;
+        }
+
+        & + li {
+            margin-left: 0;
+            margin-top: .5rem;
+        }
+    }
+
+}
+
+// Numbers listed
+.theme-number {
+    position: relative;
+    transition: all .2s ease-in-out;
+
+    &.revisit {
+        border-color: $global-green-color;
+        color: $global-green-color;
+        background: $global-revisit-background;
+    }
+
+    &.busy {
+        border-color: $global-danger-color;
+        color: $global-danger-color;
+        background: $global-background-busy;
+    }
+
+    &.unavailable {
+        border-color: rgba(0,0,0,0.125);
+        color: rgba(0,0,0,0.125);
+        background: rgba(0,0,0,0.002);
+    }
+
+    &:hover {
+        box-shadow: 0 5px 10px rgba(0,0,0,0.05);
+
+        .theme-actions {
+            @include media-medium-and-bigger {
+                display: flex !important;
+            }
+        }
+    }
+
+    .theme-actions {
+        position: absolute;
+        right: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+
+        @include media-medium-and-bigger{
+            display: none !important;
+        }
+
+        & > i {
+            cursor: pointer;
+            transition: all .1s ease-in-out;
+            min-width: 30px;
+            &:before {
+                position: relative;
+                top: 50%;
+                left: 50%;
+                transform: translateX(-50%) translateY(-75%);
+            }
+        }
+        
+        & > i:nth-child(2) {
+            font-size: 1.3rem;
+            &:hover {
+                color: $global-green-color;
+            }
+        }
+
+        & > i:nth-child(3) {
+            &:hover {
+                color: $global-gray-color;
+            }
+        }
+
+        & > i:nth-child(4) {
+            font-size: 1.5rem;
+            &:hover {
+                color: $global-danger-color;
+            }
+        }
+
+        & > i + i {
+            margin-left: 15px;
+            @include media-medium-and-bigger {
+                margin-left: 0;
+            }
+        }
+
+    }
+
+    &.revisit,
+    &.busy,
+    &.unavailable {
+        .theme-actions {
+            & > i:hover {
+                color: $global-color;
+            }
+        }
+    }
+
 }
